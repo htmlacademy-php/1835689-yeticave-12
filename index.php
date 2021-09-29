@@ -3,7 +3,7 @@
 require_once('helpers.php');
 require_once('functions.php');
 
-$link = mysqli_connect("localhost", "root", "", "yetycave");
+$link = mysqli_connect("1835689-yeticave-12", "root", "", "yetycave");
 mysqli_set_charset($link, "utf8");
 
 if(!$link) {
