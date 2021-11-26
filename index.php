@@ -15,7 +15,7 @@ else {
 
     if ($res = mysqli_query($link, $sql)) {
         $categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
-        $sql = 'SELECT `dt_add`, `title`, `image`, `cost`, `categories`.`name` FROM `lots`'
+        $sql = 'SELECT * FROM `lots`'
         . 'JOIN `categories` ON `lots`.`category_id` = `categories`.`id`'
         . 'ORDER BY `dt_add` DESC LIMIT 6';
 
