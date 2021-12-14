@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title><?= htmlspecialchars($lot['title']); ?></title>
-  <link href="../css/normalize.min.css" rel="stylesheet">
-  <link href="../css/style.css" rel="stylesheet">
+  <title>Лот</title>
+  <link href="css/normalize.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -14,7 +14,7 @@
     <div class="main-header__container container">
       <h1 class="visually-hidden">YetiCave</h1>
       <a class="main-header__logo" href="index.html">
-        <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
+        <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
       </a>
       <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru" autocomplete="off">
         <input type="search" name="search" placeholder="Поиск лота">
@@ -44,7 +44,7 @@
     <ul class="nav__list container">
     <?php foreach ($categories as $category) : ?>
       <li class="nav__item">
-        <a href="lot.php?category_id=<?= $category['id']; ?>"><?= htmlspecialchars($category['name']); ?></a>
+        <a href="index.php?category_id=<?= $category['id']; ?>"><?= htmlspecialchars($category['name']); ?></a>
       </li>
       <?php endforeach; ?>
     </ul>

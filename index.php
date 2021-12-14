@@ -2,16 +2,9 @@
 
 require_once('helpers.php');
 require_once('functions.php');
+require_once('connect.php');
 
-$link = mysqli_connect("1835689-yeticave-12", "root", "", "yetycave");
-mysqli_set_charset($link, "utf8");
-
-if(!$link) {
-   $error = mysqli_connect_error();
-   $content = include_template('error.php', ['error' => $error]);
-}
-else {
-    $sql = 'SELECT * FROM categories';
+    $sql = 'SELECT * FROM `categories`';
 
     if ($res = mysqli_query($link, $sql)) {
         $categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
@@ -29,6 +22,5 @@ else {
         $error = mysqli_error($link);
         $content = include_template('error.php', ['error' => $error]);
     }
-}
 
-print(include_template('layout.php', ['content' => $content, 'title' => 'YetiCave', 'categories' => $categories]));
+print(include_template('layout.php', ['content' => $content, 'categories' => $categories]));
