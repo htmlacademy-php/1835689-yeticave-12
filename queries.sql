@@ -29,13 +29,3 @@ INSERT INTO rates (dt_add, cost_rate, user_id, lot_id)
 VALUES
 (NOW(), 11999, 4, 1),
 (NOW(), 6900, 3, 6);
-
-SELECT `name` FROM `categories`;
-
-SELECT `title`, `image`, `cost`, `c`.`name`, `r`.`cost_rate` FROM `lots` `l` JOIN `categories` `c` ON `l`.`category_id` = `c`.`id` JOIN `rates` `r` ON `l`.`id` = `r`.`lot_id` ORDER BY `dt_add` DESC;
-
-SELECT `l`.`id`, `dt_add`, `user_id`, `title`, `description`, `image`, `cost`, `dt_end`, `step`, `name` FROM `lots` `l` JOIN `categories` `c` ON `l`.`category_id` = `c`.`id` WHERE `l`.`id` = 6;
-
-UPDATE `lots` SET `title` = 'DC Ply Mens 2016/2017 Snowboard' WHERE `id` = 1;
-
-SELECT `r`.`dt_add`, `cost_rate` FROM `rates` `r` JOIN `lots` `l` ON `r`.`lot_id` = `l`.`id` WHERE `l`.`id` = 6 ORDER BY `r`.`dt_add` DESC;
