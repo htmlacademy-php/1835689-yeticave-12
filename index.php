@@ -8,9 +8,9 @@ require_once('connect.php');
 
     if ($res = mysqli_query($link, $sql)) {
         $categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
-        $sql = 'SELECT * FROM `lots`'
-        . 'JOIN `categories` ON `lots`.`category_id` = `categories`.`id`'
-        . 'ORDER BY `dt_add` DESC LIMIT 6';
+        $sql = 'SELECT l.image, l.title, l.id, l.cost, l.dt_add, l.dt_end, c.name, c.id FROM lots l
+                JOIN categories c ON l.category_id = c.id
+                ORDER BY l.dt_add DESC LIMIT 6';
 
         if ($res = mysqli_query($link, $sql)) {
             $lots = mysqli_fetch_all($res, MYSQLI_ASSOC);

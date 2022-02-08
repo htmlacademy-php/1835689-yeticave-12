@@ -29,7 +29,7 @@ CREATE TABLE users (
     email CHAR(60) NOT NULL UNIQUE,
     name CHAR(100) NOT NULL,
     password CHAR(32) NOT NULL UNIQUE,
-    contact VARCHAR NOT NULL,
+    telephone VARCHAR(25) NOT NULL
 );
 
 CREATE TABLE rates (
@@ -44,4 +44,4 @@ CREATE TABLE winners (
     id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     lot_id INT(11) UNSIGNED NOT NULL,
     user_id INT(11) UNSIGNED NOT NULL
-)
+);

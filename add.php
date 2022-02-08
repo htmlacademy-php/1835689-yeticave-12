@@ -33,9 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if(is_date_valid($value) === false) {
                 return "Введите дату в формате ГГГГ-ММ-ДД";
             }
-        },
-        'lot-date' => function($value) {
-            return validateDate($value);
         }
     ];
 
@@ -61,14 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $file_type = finfo_file($finfo, $tmp_name);
 
-        if ($file_type !== "image/jpeg" || "image/png") {
-            $errors['lot_img'] = "Загрузите файл в формате JPEG или PNG";
+        if ($file_type !== "image/jpeg") {
+            $errors['image'] = "Загрузите файл в формате JPEG или PNG";
         } else {
             move_uploaded_file($tmp_name, 'uploads/' . $filename);
             $lot['image'] = $filename;
         }
     } else {
-        $errors['lot_img'] = "Вы не загрузили файл";
+        $errors['image'] = "Вы не загрузили файл";
     }
 
     if (count($errors)) {

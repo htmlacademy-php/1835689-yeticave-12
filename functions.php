@@ -8,10 +8,12 @@ function formate_cost($form_cost) {
     return $form_cost . ' ' . '&#8381';
 }
 
+//функция вычесляет разницу между датой ввода и датой окончания лота
+
 function get_dt_range($date) {
     $cur_date = date_create('now');
-    $date = date_create($date);
-    $diff = date_diff($cur_date, $date);
+    $gen_date = date_create($date);
+    $diff = date_diff($cur_date, $gen_date);
     return $diff->d * 24 + $diff->h . ':' . $diff->i;
 }
 

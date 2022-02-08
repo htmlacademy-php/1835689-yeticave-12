@@ -9,7 +9,11 @@ $sql = 'SELECT * FROM `categories`';
     if ($res = mysqli_query($link, $sql)) {
         $categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
         $id = intval($_GET['lot_id']);
-        $sql = 'SELECT * FROM `lots` WHERE `id` = ' . $id;
+        $sql = "
+            SELECT * FROM `lots` l
+            JOIN `categories` c ON l.`category_id` = c.`id`
+            WHERE l.`id` = ${id}
+        ";
 
         if ($res = mysqli_query($link, $sql)) {
             $lot = mysqli_fetch_assoc($res);

@@ -11,8 +11,8 @@
                     </div>
                     <div class="lot-item__right">
                         <div class="lot-item__state">
-                            <? $res = get_dt_range($lot['dt_add']); ?>
-                            <div class="lot-item__timer timer<?= ($res < 1) ? 'timer--finishing' : ''; ?>"><?= $res; ?>
+                            <? $res = get_dt_range($lot['dt_end']); ?>
+                            <div class="lot-item__timer timer <?= ($res < 1) ? 'timer--finishing' : ''; ?>"><?= $res; ?>
                             </div>
                             <div class="lot-item__cost-state">
                                 <div class="lot-item__rate">
