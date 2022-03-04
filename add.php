@@ -71,15 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (count($errors)) {
         $content = include_template('add-main.php', ['lot' => $lot, 'errors' => $errors, 'categories' => $categories]);
     } else {
-        $sql = 'INSERT INTO `lots` (`dt_add`, `category_id`, `user_id`, `title`, `description`, `image`, `cost`, `dt_end`, `step`) VALUES (NOW(), ?, 1, ?, ?, ?, ?, ?, ?)';
+        $sql = "INSERT INTO `lots` (`dt_add`, `category_id`, `user_id`, `title`, `description`, `image`, `cost`, `dt_end`, `step`)
+                VALUES (NOW(), '{$lot['category']}', 1, '{$lot['lot-name']}', '{$lot['message']}', '{$lot['image']}', '{$lot['lot-rate']}', '{$lot['lot-date']}', '{$lot['lot-step']}')";
 
-        $stmt = db_get_prepare_stmt($link, $sql, $lot);
-        $res = mysqli_stmt_execute($stmt);
-
+    $res = mysqli_query($link, $sql);
         if ($res) {
             $lot_id = mysqli_insert_id($link);
 
-            header("Location: lot.php?id=" . $lot_id);
+            header("Location: /lot.php?lot_id=" . $lot_id);
         }
     }
 } else {
