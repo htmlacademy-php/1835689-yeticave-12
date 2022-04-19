@@ -72,9 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $content = include_template('add-main.php', ['lot' => $lot, 'errors' => $errors, 'categories' => $categories]);
     } else {
         $sql = "INSERT INTO `lots` (`dt_add`, `category_id`, `user_id`, `title`, `description`, `image`, `cost`, `dt_end`, `step`)
-                VALUES (NOW(), '{$lot['category']}', 1, '{$lot['lot-name']}', '{$lot['message']}', '{$lot['image']}', '{$lot['lot-rate']}', '{$lot['lot-date']}', '{$lot['lot-step']}')";
+                VALUES (NOW(), '{$lot['category']}', {$_SESSION['user']['id']}, '{$lot['lot-name']}', '{$lot['message']}', '{$lot['image']}', '{$lot['lot-rate']}', '{$lot['lot-date']}', '{$lot['lot-step']}')";
 
-    $res = mysqli_query($link, $sql);
+        $res = mysqli_query($link, $sql);
         if ($res) {
             $lot_id = mysqli_insert_id($link);
 
