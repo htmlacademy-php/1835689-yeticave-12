@@ -28,20 +28,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($errors)) {
         $email = mysqli_real_escape_string($link, $form['email']);
-        $sql = "SELECT u.`id` FROM `users` u WHERE u.`email` = $email";
+        $sql = "
+                SELECT u.`id` FROM `users` u
+                WHERE u.`email` = '$email'
+                ";
         $res = mysqli_query($link, $sql);
 
         if (mysqli_num_rows($res) > 0) {
             $errors['email'] = 'Пользователь с этим email уже зарегистрирован';
         } else {
-            $hash = password_hash($form['password'], PASSWORD_DEFAULT);
-            $sql = 'INSERT INTO `users` (`dt_add`, `email`, `name`, `password`, `telephone`) VALUES (NOW(), ?, ?, ?, ?)';
+            $hash = password_hash($form['password'], PASSWORD_BCRYPT);
 
-            $stmt = db_get_prepare_stmt($link, $sql, [$form['email'], $form['name'], $hash, $form['message']]);
+            $sql = "INSERT INTO `users` (`dt_add`, `email`, `password`, `name`, `telephone`)
+                    VALUES (NOW(), ?, ?, ?, ?)";
+            $stmt = db_get_prepare_stmt($link, $sql, [$form['email'], $hash, $form['name'], $form['message']]);
             $res = mysqli_stmt_execute($stmt);
         }
 
         if ($res && empty($errors)) {
+            $user_id = mysqli_insert_id($link);
+
             header("Location: /enter.php");
             exit();
         }

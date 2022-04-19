@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $link = mysqli_connect("localhost", "root", "", "yetycave");
 mysqli_set_charset($link, "utf8");
 
