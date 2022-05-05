@@ -28,7 +28,7 @@
                                 Мин. ставка <span><?= formate_cost($lot['cost']); ?></span>
                             </div>
                         </div>
-                        <form class="lot-item__form" action="rate.php" method="post" autocomplete="off">
+                        <form class="lot-item__form" action="lot.php" method="post" autocomplete="off">
                             <?php $classname = isset($errors['cost']) ? "form__item--invalid" : ""; ?>
                             <p class="lot-item__form-item form__item <?= $classname ?>">
                                 <label for="cost">Ваша ставка</label>
