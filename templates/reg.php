@@ -5,19 +5,19 @@
     <?php $classname = !empty($errors['email']) ? "form__item--invalid" : ""; ?>
     <div class="form__item <?= $classname ?>">
     <label for="email">E-mail <sup>*</sup></label>
-    <input id="email" type="text" name="email" placeholder="Введите e-mail" value="<?= $values['email'] ?? ''; ?>">
+    <input id="email" type="text" name="email" placeholder="Введите e-mail" value="<?= htmlspecialchars($values['email']) ?? ''; ?>">
     <span class="form__error"><?= $errors['email'] ?></span>
     </div>
     <?php $classname = !empty($errors['password']) ? "form__item--invalid" : ""; ?>
     <div class="form__item <?= $classname ?>">
     <label for="password">Пароль <sup>*</sup></label>
-    <input id="password" type="password" name="password" placeholder="Введите пароль" value="<?= $values['password'] ?? ''; ?>">
+    <input id="password" type="password" name="password" placeholder="Введите пароль" value="<?= htmlspecialchars($values['password']) ?? ''; ?>">
     <span class="form__error"><?= $errors['password'] ?></span>
     </div>
     <?php $classname = !empty($errors['name']) ? "form__item--invalid" : ""; ?>
     <div class="form__item <?= $classname ?>">
     <label for="name">Имя <sup>*</sup></label>
-    <input id="name" type="text" name="name" placeholder="Введите имя" value="<?= $values['name'] ?? ''; ?>">
+    <input id="name" type="text" name="name" placeholder="Введите имя" value="<?= htmlspecialchars($values['name']) ?? ''; ?>">
     <span class="form__error"><?= $errors['name'] ?></span>
     </div>
     <?php $classname = !empty($errors['message']) ? "form__item--invalid" : ""; ?>

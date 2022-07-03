@@ -21,17 +21,18 @@
                     <input type="search" name="search" placeholder="Поиск лота">
                     <input class="main-header__search-btn" type="submit" name="find" value="Найти">
                 </form>
+
                 <?php if (isset($_SESSION['user'])) : ?>
                     <a class="main-header__add-lot button" href="add.php">Добавить лот</a>
                 <?php else : ?>
-                    <a class="main-header__add-lot button" href="https://403">Добавить лот</a>
+                    <a class="main-header__add-lot button" href="403.php">Добавить лот</a>
                 <?php endif; ?>
 
                 <nav class="user-menu">
 
                     <?php if (isset($_SESSION['user'])) : ?>
                         <div class="user-menu__logged">
-                            <p><?=strip_tags($_SESSION['user']['name']); ?></p>
+                            <p><?= strip_tags($_SESSION['user']['name']); ?></p>
                             <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
                             <a class="user-menu__logout" href="logout.php">Выход</a>
                         </div>
@@ -59,7 +60,7 @@
             <ul class="nav__list container">
                 <?php foreach ($categories as $category) : ?>
                     <li class="nav__item">
-                        <a href="index.php?category_id=<?= $category['id']; ?>"><?= htmlspecialchars($category['name']); ?></a>
+                        <a href="category_show.php?category_id=<?= $category['id']; ?>"><?= htmlspecialchars($category['name']); ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -103,7 +104,13 @@
                     </svg>
                 </a>
             </div>
-            <a class="main-footer__add-lot button" href="add-lot.html">Добавить лот</a>
+
+            <?php if (isset($_SESSION['user'])) : ?>
+                <a class="main-footer__add-lot button" href="add.php">Добавить лот</a>
+            <?php else : ?>
+                <a class="main-footer__add-lot button" href="403.php">Добавить лот</a>
+            <?php endif; ?>
+
             <div class="main-footer__developed-by">
                 <span class="visually-hidden">Разработано:</span>
                 <a class="logo-academy" href="https://htmlacademy.ru/intensive/php">
