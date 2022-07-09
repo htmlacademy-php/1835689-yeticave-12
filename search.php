@@ -14,8 +14,6 @@ if ($res = mysqli_query($link, $sql)) {
 
 $lots = [];
 
-//mysqli_query($link, 'CREATE FULLTEXT INDEX lot_ft_search ON lots(title, description)');
-
 $search = $_GET['search'] ?? '';
 
 if ($search) {

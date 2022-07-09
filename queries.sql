@@ -1,5 +1,7 @@
 USE yeticave
 
+/* добавление существующего списка категорий */
+
 INSERT INTO categories (name, code)
 VALUES
 ('Доски и лыжи', 'boards'),
@@ -8,6 +10,8 @@ VALUES
 ('Одежда', 'clothing'),
 ('Инструменты', 'tools'),
 ('Разное', 'other');
+
+/* добавление существующего списка объявлений */
 
 INSERT INTO lots (dt_add, category_id, user_id, title, description, image, cost, dt_end, step)
 VALUES
@@ -18,14 +22,46 @@ VALUES
 (NOW(), 4, 1, 'Куртка для сноуборда DC Mutiny Charocal', 'Эта куртка придаст скорость и поможет согреться.', 'img/lot-5.jpg', 7500, '2021-09-28 00:00:00', 500),
 (NOW(), 6, 2, 'Маска Oakley Canopy', 'Великолепная маска, сделанная из качественных экологичных материалов', 'img/lot-6.jpg', 5400, '2021-09-30 00:00:00', 500);
 
-INSERT INTO users (dt_add, email, name, password, contact)
+/* добавление пользователей */
+
+INSERT INTO users (dt_add, email, name, password, telephone)
 VALUES
 (NOW(), 'stepankot@gmail.com', 'Степан', 'April22', '8-922-765-45-45'),
 (NOW(), 'govorucha@yandex.ru', 'Мария', 'M96govorucha', '8-913-876-54-32'),
 (NOW(), 'nelson@gmail.com', 'Константин', 'Konstantin96', '8-926-444-33-22'),
 (NOW(), 'begemot@gmail.com', 'Иван', 'ivan/Begemot', '8-930-987-55-44');
 
+/* добавление ставок */
+
 INSERT INTO rates (dt_add, cost_rate, user_id, lot_id)
 VALUES
 (NOW(), 11999, 4, 1),
 (NOW(), 6900, 3, 6);
+
+/* получить все категории */
+
+SELECT * FROM `categories`;
+
+/* показать лот по его id и категорию лота */
+
+SELECT * FROM `lots` l
+JOIN `categories` c ON l.`category_id` = c.`id`
+WHERE l.`id` = 4;
+
+/* получить самые новые, открытые лоты
+каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории */
+
+SELECT l.`id`, l.`title`, l.`cost`, l.`image`, l.`dt_add`, r.`cost_rate`, r.`lot_id`, c.`name`, c.`id` FROM `lots` l
+JOIN `categories` c ON l.`category_id` = c.`id`
+JOIN `rates` r ON l.`id` = r.`lot_id`
+ORDER BY l.`dt_add` DESC;
+
+/* обновить название лота по его идентификатору */
+
+UPDATE `lots` SET `title` = 'Шапка вязаная' WHERE `id` = 7;
+
+/* получить список ставок для лота по его идентификатору с сортировкой по дате */
+
+SELECT * FROM `rates` r
+JOIN `lots` l ON r.`lot_id` = l.`id`
+ORDER BY r.`dt_add` DESC;

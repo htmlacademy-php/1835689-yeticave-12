@@ -6,7 +6,7 @@
             $value = isset($form['email']) ? $form['email'] : ""; ?>
       <div class="form__item <?= $classname ?>"> <!-- form__item--invalid -->
         <label for="email">E-mail <sup>*</sup></label>
-        <input id="email" type="text" name="email" value="<?= $value; ?>" placeholder="Введите e-mail">
+        <input id="email" type="text" name="email" value="<?= htmlspecialchars($value); ?>" placeholder="Введите e-mail">
         <?php if ($classname) : ?>
         <span class="form__error"><?= $errors['email']; ?></span>
         <?php endif; ?>
@@ -15,7 +15,7 @@
             $value = isset($form['password']) ? $form['password'] : ""; ?>
       <div class="form__item form__item--last <?= $classname ?>">
         <label for="password">Пароль <sup>*</sup></label>
-        <input id="password" type="password" name="password" value="<?= $value; ?>" placeholder="Введите пароль">
+        <input id="password" type="password" name="password" value="<?= htmlspecialchars($value); ?>" placeholder="Введите пароль">
         <?php if ($classname) : ?>
         <span class="form__error"><?= $errors['password']; ?></span>
         <?php endif; ?>

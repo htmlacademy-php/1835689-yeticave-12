@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors['image'] = "Загрузите файл в формате JPEG или PNG";
         } else {
             move_uploaded_file($tmp_name, 'uploads/' . $filename);
-            $lot['image'] = $filename;
+            $lot['image'] = 'uploads/' . $filename;
         }
     } else {
         $errors['image'] = "Вы не загрузили файл";
