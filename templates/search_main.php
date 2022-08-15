@@ -23,5 +23,3 @@
             <?php endforeach; ?>
         </ul>
     </section>
-
-

@@ -14,7 +14,7 @@ if ($res = mysqli_query($link, $sql)) {
 
 $tpl_data = [];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form = $_POST;
     $errors = [];
 

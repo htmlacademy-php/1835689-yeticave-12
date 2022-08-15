@@ -3,12 +3,13 @@
 /**
  * Округляет переданное число и разделяет разряды
  *
- * @param $form_cost Число, которое надо округлить и разделить на разряды, чтобы имело красивый вид на сайте
+ * @param float $form_cost - число, которое надо округлить и разделить на разряды, чтобы имело красивый вид на сайте
  *
- * @return $form_cost В виде округленного числа с разделенными разрядами
+ * @return string - отформатированное число
  */
 
-function formate_cost($form_cost) {
+function formate_cost($form_cost)
+{
     $form_cost = ceil($form_cost);
     $form_cost = ($form_cost < 1000) ? $form_cost : number_format($form_cost, 0, '', ' ');
     return $form_cost . ' ' . '&#8381';
@@ -16,12 +17,13 @@ function formate_cost($form_cost) {
 
 /** Возвращает разницу между текущей датой и переданной датой
  *
- * @param $date Дата в фомате 'ГГГГ-ММ-ДД', до которой надо вычислить разницу
+ * @param string $date - дата в фомате 'ГГГГ-ММ-ДД' истечения времени
  *
- * @return $diff Разница между сегодняшней датой и заданной дататой в формате 'ЧЧ:ММ'
+ * @return string - разница между сегодняшней датой и заданной дататой в формате 'ЧЧ:ММ'
 */
 
-function get_dt_range($date) {
+function get_dt_range($date)
+{
     $cur_date = date_create('now');
     $gen_date = date_create($date);
     $diff = date_diff($cur_date, $gen_date);
@@ -30,13 +32,13 @@ function get_dt_range($date) {
 
 /** Проверяет в форме данные поля "Категория" на существование в заданном списке
  *
- * @param $id Номер введенной категории
- * @param $allowed_list Название категории
+ * @param array $id, $allowed_list - номер и название категории
  *
- * @return Отрицательный ответ, если ничего не совпадает, либо null, если все хорошо
+ * @return null
  */
 
-function validateCategory($id, $allowed_list) {
+function validateCategory($id, $allowed_list)
+{
     if (!in_array($id, $allowed_list)) {
         return "Указана не существующая категория";
     }
@@ -45,12 +47,13 @@ function validateCategory($id, $allowed_list) {
 
 /**  Проверяет число на положительное
  *
- * @param $value Введенное число
+ * @param number $value - введенное число
  *
- * @return Если число меньше 0, выведет ошибку
+ * @return null
 */
 
-function validatePositive($value) {
+function validatePositive($value)
+{
     if ($value <= 0) {
         return "Введите положительное число";
     }
@@ -59,12 +62,13 @@ function validatePositive($value) {
 
 /** Проверяет дату окончания лота, чтобы она была не менее суток
  *
- * @param $date Дата введенная в поле окончания лота
+ * @param string $date - дата введенная в поле окончания лота
  *
- * @return смотрит разницу между текущей датой и введенной датой и возвращает ошибку, если она меньше суток
+ * @return string - смотрит разницу между текущей датой и введенной датой и возвращает ошибку, если она меньше суток
  */
 
-function validateDate($date) {
+function validateDate($date)
+{
     $cur_date = date_create('now');
     $date = date_create($date);
     $diff = date_diff($cur_date, $date);
@@ -75,23 +79,25 @@ function validateDate($date) {
 
 /** Фильтрует и сохраняет значение из формы
  *
- * @param $name Введенное значение в форму
+ * @param string $name - введенное значение в форму
  *
- * @return Возвращает отфильтрованное значение
+ * @return string - Возвращает отфильтрованное значение
  */
 
-function getPostVal($name) {
+function getPostVal($name)
+{
     return filter_input(INPUT_POST, $name);
 }
 
 /** Возвращает разницу между текущей датой и переданной датой в минутах
  *
- * @param $date Дата в фомате 'ГГГГ-ММ-ДД', до которой надо вычислить разницу
+ * @param string $date - дата в фомате 'ГГГГ-ММ-ДД' истечения времени
  *
- * @return $diff Разница между сегодняшней датой и заданной дататой в минутах
+ * @return string - разница между сегодняшней датой и заданной дататой в минутах
 */
 
-function diffDate($date) {
+function diffDate($date)
+{
     $cur_date = date_create('now');
     $date = date_create($date);
     $diff = date_diff($cur_date, $date);

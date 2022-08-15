@@ -29,7 +29,8 @@
                             <?php $classname = isset($errors['cost']) ? "form__item--invalid" : ""; ?>
                             <p class="lot-item__form-item form__item <?= $classname ?>">
                                 <label for="cost">Ваша ставка</label>
-                                <input id="cost" type="text" name="cost" value="<?= getPostVal('cost'); ?>" placeholder="<?= ($lot['cost'] + $lot['step']); ?>">
+                                <?php $min_bet = ($lot['cost'] + $lot['step']); ?>
+                                <input id="cost" type="text" name="cost" value="<?= getPostVal('cost'); ?>" placeholder="<?= $min_bet; ?>">
                                 <?php if (isset($errors)) : ?>
                                     <span class="form__error">Введите наименование лота</span>
                                 <?php endif; ?>
@@ -38,17 +39,17 @@
                         </form>
                     </div>
                     <div class="history">
-                        <h3>История ставок (<span>10</span>)</h3>
-                        <table class="history__list">
-                            <?php foreach ($rates as $rate) : ?>
+                        <h3>История ставок (<span><?= count($rates); ?></span>)</h3>
+                        <?php foreach ($rates as $rate) : ?>
+                            <table class="history__list">
                                 <tr class="history__item">
                                     <td class="history__name"><?= htmlspecialchars($rate['name']); ?></td>
                                     <td class="history__price"><?= formate_cost($rate['cost_rate']); ?></td>
-                                    <? $number = diffDate($rate['dt_add']); ?>
+                                    <?php $number = diffDate($rate['dt_add']); ?>
                                     <td class="history__time"><?= "{$number} " . get_noun_plural_form((int) $number, 'минута', 'минуты', 'минут'); ?> назад</td>
                                 </tr>
-                            <?php endforeach; ?>
-                        </table>
+                            </table>
+                        <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
             </div>
