@@ -12,7 +12,7 @@ if ($res = mysqli_query($link, $sql)) {
     $content = include_template('error.php', ['error' => mysqli_error($link)]);
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form = $_POST;
 
     $required_fields = ['email', 'password'];

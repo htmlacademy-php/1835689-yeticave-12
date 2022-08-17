@@ -20,7 +20,8 @@ CREATE TABLE lots (
     image CHAR(128) NOT NULL,
     cost DECIMAL NOT NULL,
     dt_end DATETIME NOT NULL,
-    step INT(5) UNSIGNED NOT NULL
+    step INT(5) UNSIGNED NOT NULL,
+    FULLTEXT (title, description)
 );
 
 CREATE TABLE users (
@@ -28,7 +29,7 @@ CREATE TABLE users (
     dt_add DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     email CHAR(60) NOT NULL UNIQUE,
     name CHAR(100) NOT NULL,
-    password CHAR(32) NOT NULL UNIQUE,
+    password CHAR(60) NOT NULL UNIQUE,
     telephone VARCHAR(25) NOT NULL
 );
 
