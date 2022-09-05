@@ -32,4 +32,4 @@ if ($search) {
 
 $content = include_template('search_main.php', ['lots' => $lots]);
 
-print include_template('layout-inner.php', ['content' => $content, 'categories' => $categories]);
+print include_template('layout.php', ['content' => $content, 'categories' => $categories]);

@@ -8,6 +8,7 @@
             <?php endforeach; ?>
         </ul>
     </nav>
+
     <section class="rates container">
         <h2>Мои ставки</h2>
         <?php foreach ($bets as $bet) : ?>
@@ -17,7 +18,7 @@
                         <div class="rates__img">
                             <img src="<?= htmlspecialchars($bet['image']); ?>" width="54" height="40" alt="<?= htmlspecialchars($bet['title']); ?>">
                         </div>
-                        <h3 class="rates__title"><a href="lot.php?lot_id=<?= $lot['id']; ?>"><?= htmlspecialchars($bet['title']); ?></a></h3>
+                        <h3 class="rates__title"><a href="lot.php?lot_id=<?= $bet['lot_id']; ?>"><?= htmlspecialchars($bet['title']); ?></a></h3>
                     </td>
                     <td class="rates__category">
                         <?= htmlspecialchars($bet['name']); ?>
@@ -31,10 +32,11 @@
                     </td>
                     <?php $number = diffDate($bet['dt_add']); ?>
                     <td class="rates__time">
-                    <?= "{$number} " . get_noun_plural_form((int) $number, 'минута', 'минуты', 'минут'); ?> назад
+                        <?= "{$number} " . get_noun_plural_form((int) $number, 'минута', 'минуты', 'минут'); ?> назад
                     </td>
                 </tr>
             </table>
         <?php endforeach; ?>
     </section>
+
 </main>

@@ -26,7 +26,7 @@ function get_dt_range($date)
 {
     $cur_date = date_create('now');
     $gen_date = date_create($date);
-    $diff = date_diff($cur_date, $gen_date);
+    $diff = date_diff($gen_date, $cur_date);
     return $diff->d * 24 + $diff->h . ':' . $diff->i;
 }
 
