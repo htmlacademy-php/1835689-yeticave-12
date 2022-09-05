@@ -59,19 +59,15 @@ if (isset($_SESSION['user'])) {
         if (!empty($_FILES['lot_img']['name'])) {
             $tmp_name = $_FILES['lot_img']['tmp_name'];
             $image = $_FILES['lot_img']['name'];
+            $allowed = array('jpeg', 'png', 'jpg');
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
 
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $file_type = finfo_file($finfo, $tmp_name);
 
-            if ($file_type === "image/jpeg") {
-                $ext = ".jpg";
-            } else if ($file_type === "image/png") {
-                $ext = ".png";
-            }
+            $filename = uniqid() . ".$ext";
 
-            $filename = uniqid() . $ext;
-
-            if ($file_type !== $ext) {
+            if (!in_array($ext, $allowed)) {
                 $errors['image'] = "Загрузите файл в формате JPEG или PNG";
             } else {
                 move_uploaded_file($tmp_name, 'uploads/' . $filename);

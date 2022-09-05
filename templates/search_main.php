@@ -1,5 +1,6 @@
-<section class="lots">
-    <h2>Результаты поиска по запросу «<span><?= htmlspecialchars($_GET['search']); ?></span>»</h2>
+<div class="container">
+    <section class="lots">
+        <h2>Результаты поиска по запросу «<span><?= htmlspecialchars($_GET['search']); ?></span>»</h2>
         <ul class="lots__list">
             <?php foreach ($lots as $lot) : ?>
                 <li class="lots__item lot">
@@ -23,3 +24,4 @@
             <?php endforeach; ?>
         </ul>
     </section>
+</div>
