@@ -13,7 +13,7 @@
                 <?php if (isset($_SESSION['user'])) : ?>
                     <div class="lot-item__state">
                         <?php $res = get_dt_range($lot['dt_end']); ?>
-                        <div class="lot-item__timer timer <?= ($res < 1) ? 'timer--finishing' : ''; ?>"><?= $res; ?>
+                        <div class="lot-item__timer timer <?= ($res < 1) ? 'timer--finishing' : ''; ?>"><?= "$res[0] : $res[1]"; ?>
                         </div>
                         <div class="lot-item__cost-state">
                             <div class="lot-item__rate">
@@ -32,7 +32,8 @@
                                 <?php $min_bet = ($lot['cost'] + $lot['step']); ?>
                                 <input id="cost" type="text" name="cost" value="<?= getPostVal('cost'); ?>" placeholder="<?= $min_bet; ?>">
                                 <?php if (isset($errors)) : ?>
-                                    <span class="form__error">Введите наименование лота</span>
+                                    <span class="form__error"><?= $errors['cost'] ?></span>
+
                                 <?php endif; ?>
                             </p>
                             <button type="submit" class="button">Сделать ставку</button>
