@@ -25,7 +25,7 @@
                     </td>
                     <td class="rates__timer">
                         <?php $res = get_dt_range($bet['dt_end']); ?>
-                        <div class="timer <?= ($res < 1) ? 'timer--finishing' : ''; ?>"><?= $res; ?></div>
+                        <div class="timer <?= ($res < 1) ? 'timer--finishing' : ''; ?>"><?= "$res[0] : $res[1]"; ?></div>
                     </td>
                     <td class="rates__price">
                         <?= formate_cost($bet['cost_rate']); ?>

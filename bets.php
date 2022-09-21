@@ -2,7 +2,7 @@
 
 require_once('helpers.php');
 require_once('functions.php');
-require_once('connect.php');
+require_once('connect.example.php');
 
 $sql = 'SELECT * FROM `categories`';
 
@@ -12,7 +12,7 @@ if ($res = mysqli_query($link, $sql)) {
     if ($_GET['user_id'] === $_SESSION['user']['id']) {
 
     $sql = "
-            SELECT * FROM `rates` r
+            SELECT r.`id`, r.`dt_add`, `cost_rate`, `lot_id`, `image`, `title`, l.`dt_end`, `name` FROM `rates` r
             JOIN `lots` l ON r.`lot_id` = l.`id`
             JOIN `categories` c ON l.`category_id` = c.`id`
             WHERE r.`user_id` = ${id}

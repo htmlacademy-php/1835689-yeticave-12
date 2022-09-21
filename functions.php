@@ -24,10 +24,21 @@ function formate_cost($form_cost)
 
 function get_dt_range($date)
 {
+    date_default_timezone_set('Eroupe/Moscow');
+    $final_date = date_create($date);
     $cur_date = date_create('now');
-    $gen_date = date_create($date);
-    $diff = date_diff($gen_date, $cur_date);
-    return $diff->d * 24 + $diff->h . ':' . $diff->i;
+    $diff = date_diff($final_date, $cur_date);
+    $format_diff = date_interval_format($diff, "%d %H %I");
+    $arr = explode(" ", $format_diff);
+
+    $hours = $arr[0] * 24 + $arr[1];
+    $minuts = intval($arr[2]);
+    $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+    $minuts = str_pad($minuts, 2, "0", STR_PAD_LEFT);
+    $res[] = $hours;
+    $res[] = $minuts;
+
+    return $res;
 }
 
 /** Проверяет в форме данные поля "Категория" на существование в заданном списке
@@ -98,10 +109,16 @@ function getPostVal($name)
 
 function diffDate($date)
 {
+    date_default_timezone_set('Eroupe/Moscow');
+    $final_date = date_create($date);
     $cur_date = date_create('now');
-    $date = date_create($date);
-    $diff = date_diff($cur_date, $date);
-    return $diff->i;
+    $diff = date_diff($final_date, $cur_date);
+    $format_diff = date_interval_format($diff, "%d %H %I");
+    $arr = explode(" ", $format_diff);
+
+    $minutes = intval($arr[0] * 1440 + $arr[1] * 60 + $arr[2]);
+
+    return $minutes;
 }
 
 ?>

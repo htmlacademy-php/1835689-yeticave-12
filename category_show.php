@@ -2,7 +2,7 @@
 
 require_once('helpers.php');
 require_once('functions.php');
-require_once('connect.php');
+require_once('connect.example.php');
 
 $sql = 'SELECT * FROM `categories`';
 
