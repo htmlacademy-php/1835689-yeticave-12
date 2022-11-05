@@ -38,30 +38,3 @@ VALUES
 (NOW(), 11999, 4, 1),
 (NOW(), 6900, 3, 6);
 
-/* получить все категории */
-
-SELECT * FROM `categories`;
-
-/* показать лот по его id и категорию лота */
-
-SELECT * FROM `lots` l
-JOIN `categories` c ON l.`category_id` = c.`id`
-WHERE l.`id` = 4;
-
-/* получить самые новые, открытые лоты
-каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории */
-
-SELECT l.`id`, l.`title`, l.`cost`, l.`image`, l.`dt_add`, r.`cost_rate`, r.`lot_id`, c.`name`, c.`id` FROM `lots` l
-JOIN `categories` c ON l.`category_id` = c.`id`
-JOIN `rates` r ON l.`id` = r.`lot_id`
-ORDER BY l.`dt_add` DESC;
-
-/* обновить название лота по его идентификатору */
-
-UPDATE `lots` SET `title` = 'Шапка вязаная' WHERE `id` = 7;
-
-/* получить список ставок для лота по его идентификатору с сортировкой по дате */
-
-SELECT * FROM `rates` r
-JOIN `lots` l ON r.`lot_id` = l.`id`
-ORDER BY r.`dt_add` DESC;

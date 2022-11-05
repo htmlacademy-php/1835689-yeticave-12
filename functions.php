@@ -121,4 +121,108 @@ function diffDate($date)
     return $minutes;
 }
 
+/**
+ * Записывает в таблицу лотов в базе данных ID победителя торгов по конкретному лоту
+ *
+ * @param $con - Подключение к MySQL
+ * @param $winer_id - ID победителя торгов
+ * @param $lot_id - ID лота
+ *
+ * @return [Bool | String] $res - Возвращает true в случае успешной записи или описание последней ошибки подключения
+ */
+
+function add_winner ($con, $winer_id, $lot_id) {
+    if (!$con) {
+    $error = mysqli_connect_error();
+    return $error;
+    } else {
+        $sql = "
+        UPDATE lots SET winner_id = $winer_id WHERE id = $lot_id
+        ";
+        $result = mysqli_query($con, $sql);
+        if ($result) {
+            return $result;
+        }
+            $error = mysqli_error($con);
+            return $error;
+    }
+}
+
+/**
+ * Возвращает имя пользователя и название лота для письма
+ *
+ * @param $con - Подключение к MySQL
+ * @param $id - ID лота
+ *
+ * @return [Array | String] $data - массив или описание последней ошибки подключения
+ */
+
+function get_user_win ($con, $id) {
+    if (!$con) {
+    $error = mysqli_connect_error();
+    return $error;
+    } else {
+        $sql = "
+        SELECT l.`id`, l.`title`, u.`name`, u.`telephone` FROM `rates` r
+        JOIN `lots` l ON r.`lot_id` = l.`id`
+        JOIN `users` u ON r.`user_id` = u.`id`
+        WHERE l.`id` = $id
+        ";
+        $result = mysqli_query($con, $sql);
+        if ($result) {
+            $data = get_arrow($result);
+            return $data;
+        }
+        $error = mysqli_error($con);
+        return $error;
+    }
+}
+
+/**
+ * Возвращает email, телефон и имя пользователя по id
+ *
+ * @param $con - Подключение к MySQL
+ * @param $id - ID пользователя
+ *
+ * @return [Array | String] $user_date - массив или описание последней ошибки подключения
+ */
+
+function get_user_contacts ($con, $id) {
+    if (!$con) {
+    $error = mysqli_connect_error();
+    return $error;
+    } else {
+        $sql = "
+        SELECT u.`name`, u.`email`, u.`telephone` FROM `users` u
+        WHERE `id` = $id
+        ";
+        $result = mysqli_query($con, $sql);
+        if ($result) {
+            $user_date = get_arrow($result);
+            return $user_date;
+        }
+        $error = mysqli_error($con);
+        return $error;
+    }
+}
+
+/**
+ * Возвращает массив из объекта результата запроса
+ *
+ * @param object $result_query mysqli - Результат запроса к базе данных
+ *
+ * @return array
+ */
+
+function get_arrow ($result_query) {
+    $row = mysqli_num_rows($result_query);
+    if ($row === 1) {
+        $arrow = mysqli_fetch_assoc($result_query);
+    } else if ($row > 1) {
+        $arrow = mysqli_fetch_all($result_query, MYSQLI_ASSOC);
+    }
+
+    return $arrow;
+}
+
 ?>
