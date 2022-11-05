@@ -21,6 +21,10 @@ CREATE TABLE lots (
     cost DECIMAL NOT NULL,
     dt_end DATETIME NOT NULL,
     step INT(5) UNSIGNED NOT NULL,
+    winner_id INT(5),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (winner_id) REFERENCES users(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id),
     FULLTEXT (title, description)
 );
 
@@ -38,11 +42,7 @@ CREATE TABLE rates (
     dt_add DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     cost_rate INT(11) UNSIGNED NOT NULL,
     user_id INT(11) UNSIGNED NOT NULL,
-    lot_id INT(11) UNSIGNED NOT NULL
-);
-
-CREATE TABLE winners (
-    id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     lot_id INT(11) UNSIGNED NOT NULL,
-    user_id INT(11) UNSIGNED NOT NULL
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (lot_id) REFERENCES lots(id)
 );

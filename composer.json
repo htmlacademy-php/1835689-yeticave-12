@@ -1,0 +1,20 @@
+{
+    "name": "dns/1835689-yeticave-12",
+    "description": "\"\u0000\u0000\u0000\u0000-\u0000\u0000\u0000\u0000\u0000\u0000\u0000\"",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dns\\1835689Yeticave12\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Olga Kashina",
+            "email": "giperfrog@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/mailer": "^5.4"
+    }
+}

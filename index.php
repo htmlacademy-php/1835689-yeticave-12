@@ -2,7 +2,7 @@
 
 require_once('helpers.php');
 require_once('functions.php');
-require_once('connect.example.php');
+require_once('connect.php');
 
 $sql = 'SELECT * FROM `categories`';
 
@@ -24,5 +24,7 @@ if ($res = mysqli_query($link, $sql)) {
     $error = mysqli_error($link);
     $content = include_template('error.php', ['error' => $error]);
 }
+
+$get_winner = include_template('getwinner.php', ['lots' => $lots, 'bet' => $bet]);
 
 print(include_template('layout.php', ['content' => $content, 'categories' => $categories]));
