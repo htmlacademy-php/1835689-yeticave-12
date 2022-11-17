@@ -16,7 +16,7 @@
                                 <span class="lot__cost"><?= formate_cost($lot['cost']); ?></span>
                             </div>
                             <?php $res = get_dt_range($lot['dt_end']); ?>
-                            <div class="lot__timer timer <?= ($res < 1) ? 'timer--finishing' : ''; ?>"><?= $res; ?>
+                            <div class="lot__timer timer <?= ($res < 1) ? 'timer--finishing' : ''; ?>"><?= "$res[0] : $res[1]"; ?>
                             </div>
                         </div>
                     </div>
